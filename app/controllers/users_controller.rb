@@ -39,9 +39,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to root_url, :notice => "Signed up!" }
         format.json { render json: @user, status: :created, location: @user }
-        redirect_to root_url, :notice => "Signed up!"
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -68,12 +67,12 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :ok }
+    User.delete(params[:id])
+    
+    respond_to do |format|  
+      if @user.delete
+        redirect_to root_url, notice: 'user delete'
+      end
     end
   end
 end
