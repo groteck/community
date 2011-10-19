@@ -67,12 +67,8 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    User.delete(params[:id])
-    
-    respond_to do |format|  
-      if @user.delete
-        redirect_to root_url, notice: 'user delete'
-      end
-    end
-  end
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to users_path, notice: 'user delete'
+   end
 end

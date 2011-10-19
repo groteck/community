@@ -1,9 +1,11 @@
 Community::Application.routes.draw do
-  get "log_in" => "sessions#new", :as => "log_in"  
-  get "log_out" => "sessions#destroy", :as => "log_out"  
-  
-  get "sign_up" => "users#new", :as => "sign_up"  
-  root :to => "users#new"  
+#  get "log_in" => "sessions#new", :as => "log_in"  
+#  get "log_out" => "sessions#destroy", :as => "log_out"  
+  match "log_in" => "sessions#new"
+  match "log_out" => "sessions#destroy"  
+#  get "sign_up" => "users#new", :as => "sign_up" 
+  match "sign_up" => "users#new" 
+  root :to => "sessions#new"  
   resources :users  
   resources :sessions  
 
