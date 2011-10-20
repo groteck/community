@@ -1,0 +1,31 @@
+<h1>blog entries</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+    <th>Tag</th>
+    <th>User</th>
+    <th>Updated at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @blog_entries.each do |blog_entry| %>
+  <tr>
+    <td><%= blog_entry.title %></td>
+    <td><%= blog_entry.content %></td>
+    <td><%= blog_entry.tag_id %></td>
+    <td><%= blog_entry.user_id %></td>
+    <td><%= blog_entry.updated_at %></td>
+    <td><%= link_to 'Show', blog_entry %></td>
+    <td><%= link_to 'Edit', edit_blog_entry_path(blog_entry) %></td>
+    <td><%= link_to 'Destroy', blog_entry, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Blog entry', new_blog_entry_path %>
