@@ -2,7 +2,7 @@
 
 <p>
 <% @blog_entry.comments.each do |comment| %>
-  <%=comment.user_id%> </br>
+  <%=comment.user.email if comment.user %> </br>
   <%=comment.content %></br>
   <%=comment.created_at %></br>  
 <%end%>
