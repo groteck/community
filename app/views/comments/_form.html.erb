@@ -1,4 +1,4 @@
-<%= form_for(@comment) do |f| %>
+<%= form_for([@blog_entry,@comment]) do |f| %>
   <% if @comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -14,18 +14,6 @@
   <div class="field">
     <%= f.label :content %><br />
     <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :update_at %><br />
-    <%= f.datetime_select :update_at %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :blog_entrie_id %><br />
-    <%= f.number_field :blog_entrie_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

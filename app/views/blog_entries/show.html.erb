@@ -12,12 +12,12 @@
 
 <p>
   <b>Tag:</b>
-  <%= @blog_entry.tag_id %>
+  <%= @blog_entry.tag_id  %>
 </p>
 
 <p>
   <b>User:</b>
-  <%= @blog_entry.user_id %>
+  <%= @blog_entry.user.email %>
 </p>
 
 <p>
@@ -28,3 +28,17 @@
 
 <%= link_to 'Edit', edit_blog_entry_path(@blog_entry) %> |
 <%= link_to 'Back', blog_entries_path %>
+
+
+<div class="comments">
+ <hr>
+  <h4>Comments:</h4>
+  <%= render "comments/comment" %> 
+
+<div class="form_comments">
+<h4> Add a comment:</h4><br />
+<% if flash[:error] %>
+  <p id="notice"><%= flash[:error] %></p>
+<% end %> 
+<%= render "comments/form" %> 
+</div>

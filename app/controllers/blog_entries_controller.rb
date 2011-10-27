@@ -13,8 +13,10 @@ class BlogEntriesController < ApplicationController
   # GET /blog_entries/1
   # GET /blog_entries/1.json
   def show
-    @blog_entry = BlogEntry.find(params[:id])
-
+    @blog_entry = BlogEntry.find(params[:id]) 
+    if @blog_entry
+      @comment = @blog_entry.comments.build
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @blog_entry }
@@ -41,7 +43,8 @@ class BlogEntriesController < ApplicationController
   # POST /blog_entries.json
   def create
     @blog_entry = BlogEntry.new(params[:blog_entry])
-
+    @blog_entry.user_id = current_user.id
+    @blog_entry.save
     respond_to do |format|
       if @blog_entry.save
         format.html { redirect_to @blog_entry, notice: 'Blog entry was successfully created.' }

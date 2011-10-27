@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+<% @blog_entry.comments.each do |comment| %>
+  <%=comment.user_id%> </br>
+  <%=comment.content %></br>
+  <%=comment.created_at %></br>  
+<%end%>
+
+
+
+
+
+
+
+
