@@ -5,7 +5,6 @@ class CreateBlogEntries < ActiveRecord::Migration
       t.text :content
       t.integer :tag_id
       t.integer :user_id
-      t.datetime :updated_at
 
       t.timestamps
     end
