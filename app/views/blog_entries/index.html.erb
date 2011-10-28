@@ -1,30 +1,12 @@
-<h1>blog entries</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Content</th>
-    <th>Tag</th>
-    <th>User</th>
-    <th>Updated at</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @blog_entries.each do |blog_entry| %>
-  <tr>
-    <td><%= blog_entry.title %></td>
-    <td><%= blog_entry.content %></td>
-    <td><%= blog_entry.tag_id %></td>
-    <td><%= blog_entry.user_id %></td>
-    <td><%= blog_entry.updated_at %></td>
-    <td><%= link_to 'Show', blog_entry %></td>
-    <td><%= link_to 'Edit', edit_blog_entry_path(blog_entry) %></td>
-    <td><%= link_to 'Destroy', blog_entry, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+  <div id="blog_entry">
+    <div id="title"><%= link_to "#{blog_entry.title}", blog_entry %></div>
+    <div id="extract"><%= blog_entry.content %></div>
+    <div id="information"><% blog_entry.tags.each do |tag|%> <%= tag.name%> <%end%> <%= blog_entry.user.email%> <%= blog_entry.updated_at %></div>
+    <div id="acctions"><%= link_to 'Entrada completa', blog_entry %> | <%= link_to 'Edit', edit_blog_entry_path(blog_entry) %> 
+    | <%= link_to 'Destroy', blog_entry, confirm: 'Are you sure?', method: :delete %></div>
+  </div>
 <% end %>
-</table>
 
 <br />
 
