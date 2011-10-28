@@ -1,0 +1,64 @@
+/* variables & Mixings*/
+
+/* colors */
+
+$main-color: #a91414;
+$background-color: #fff;
+$border-color: darken(#A91414, 15%);  
+$body-color: #d5d5d5;
+$second-color: #000;
+
+/* fonts  */
+
+@mixin url {
+  font-family: 'Chivo', sans-serif;
+  color: $main-color;
+}
+@mixin title {
+  font-family: 'Contrail One', cursive; 
+  color: $main-color;
+}  
+@mixin text {
+  font-family: 'Chivo', sans-serif;
+  color: $second-color;
+}
+$h1: 100px;
+$normal: 30px;
+
+/* border  */
+
+@mixin radius {
+  border-width: 1px;
+  border-style: solid;
+  border-color: $border-color;
+  border-radius: 5px;  
+  -moz-border-radius: 5px;  
+  -webkit-border-radius: 5px;
+}
+@mixin normal{
+    border-width: 1px;
+    border-style: solid;
+    border-color: $border-color;
+}
+
+/* gerneral parts */
+html {
+  background-color: $background-color;
+}
+
+body { 
+  background-color: $body-color;
+  margin: 32px auto;
+  @include radius;
+  @include text;
+  font-size: $normal;
+  width: 960px;
+}
+a {
+  @include url;
+  font-size: $normal;
+  &:hover{
+    color: $second-color;
+  }
+}
+  
