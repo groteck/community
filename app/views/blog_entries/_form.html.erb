@@ -20,12 +20,9 @@
     <%= f.text_area :content %>
   </div>
   <div class="field">
-    <%= f.label :tag_id %><br />
-    <%= f.number_field :tag_id %>
-  </div>
-  <div class="field">
-    <%= f.label :updated_at %><br />
-    <%= f.datetime_select :updated_at %>
+    <%= f.label :tags %><br />   
+    <%= f.text_field :tags %><br />
+    nota:introducir separadas por espacios.
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,29 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
+<div id="blog_title">
   <%= @blog_entry.title %>
-</p>
+</div>
 
-<p>
-  <b>Content:</b>
+<div id="blog_content">
   <%= @blog_entry.content %>
-</p>
+</div>
 
-<p>
-  <b>Tag:</b>
-  <%= @blog_entry.tag_id  %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @blog_entry.user.email %>
-</p>
-
-<p>
-  <b>Updated at:</b>
-  <%= @blog_entry.updated_at %>
-</p>
+<div id="blog_footer">
+  by:<%= @blog_entry.user.email %>, last update:<%= @blog_entry.updated_at %></br>
+  Tags:<%= @blog_entry.tags%>
+</div>
 
 
 <%= link_to 'Edit', edit_blog_entry_path(@blog_entry) %> |

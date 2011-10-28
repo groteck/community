@@ -42,8 +42,16 @@ class BlogEntriesController < ApplicationController
   # POST /blog_entries
   # POST /blog_entries.json
   def create
+    puts params.to_s
     @blog_entry = BlogEntry.new(params[:blog_entry])
     @blog_entry.user_id = current_user.id
+    params[:tags].split.each do |tag|
+      if tag_obj = Tag.find_by_name(tag)
+        @blog_entry.tags << tag_obj
+      else 
+        @blog_entry.tags << Tag.create(:name => tag)               
+      end
+    end
     @blog_entry.save
     respond_to do |format|
       if @blog_entry.save
