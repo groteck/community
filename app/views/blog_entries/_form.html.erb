@@ -20,11 +20,11 @@
     <%= f.text_area :content %>
   </div>
   <div class="field">
-    <%= f.label :tags %><br />   
-    <%= f.text_field :tags %><br />
-    nota:introducir separadas por espacios.
+    <label for="tags">Tags</label>
+    <input id="tags" name="tags" size="30" type="text">    
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+<%end%>

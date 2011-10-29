@@ -10,7 +10,7 @@
 
 <div id="blog_footer">
   by:<%= @blog_entry.user.email %>, last update:<%= @blog_entry.updated_at %></br>
-  Tags:<%= @blog_entry.tags%>
+  Tags:<%@blog_entry.tags.each do |tag|%> <%= tag.name %> <%end%>
 </div>
 
 
@@ -20,13 +20,10 @@
 
 <div class="comments">
  <hr>
-  <h4>Comments:</h4>
+  
   <%= render "comments/comment" %> 
 
 <div class="form_comments">
 <h4> Add a comment:</h4><br />
-<% if flash[:error] %>
-  <p id="notice"><%= flash[:error] %></p>
-<% end %> 
 <%= render "comments/form" %> 
 </div>

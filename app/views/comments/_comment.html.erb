@@ -1,9 +1,9 @@
-
 <% @blog_entry.comments.each do |comment| %>
+  <%='<h1>Comments:</h1>' if comment.user %>
   <div class="content">
     <%=comment.content %>
-  <div>last update: <%=comment.updated_at %></div>
+  <div><%= ('last update: ' + comment.updated_at) if comment.user %></div>
   </div>
-  <div class="information">create at: <%=comment.created_at %> by <%= link_to "#{comment.user.email if comment.user}", comment.user %></div>
-<%end%>
+  <div class="information"><%= ('create on: ' + comment.create_at) if comment.user %> <%' by '%>  <%= link_to "#{comment.user.email if comment.user}", comment.user %></div>
+<%end%> 
 
