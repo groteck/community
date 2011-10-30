@@ -2,7 +2,7 @@ class BlogEntriesController < ApplicationController
   # GET /blog_entries
   # GET /blog_entries.json
   def index
-    @blog_entries = BlogEntry.all
+    @blog_entries = BlogEntry.order("created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -48,6 +48,9 @@ class BlogEntriesController < ApplicationController
     params[:tags].split.each do |tag|
       @blog_entry.tags << Tag.find_or_create_by_name(tag)
     end
+    
+    @blog_entry.preview = @blog_entry.content.index("<!--preview-->")   
+
     @blog_entry.save
     respond_to do |format|
       if @blog_entry.save

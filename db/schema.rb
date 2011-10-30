@@ -11,14 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111027181742) do
+ActiveRecord::Schema.define(:version => 20111030015950) do
 
   create_table "blog_entries", :force => true do |t|
     t.string   "title"
     t.text     "content"
+    t.integer  "tag_id"
     t.integer  "user_id"
-    t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "created_at"
+    t.integer  "preview",    :default => 1500
   end
 
   create_table "blog_entries_tags", :force => true do |t|
@@ -30,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20111027181742) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
+    t.datetime "update_at"
     t.integer  "user_id"
     t.integer  "blog_entry_id"
     t.datetime "created_at"

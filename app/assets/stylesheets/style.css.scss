@@ -23,9 +23,9 @@ $second-color: #000;
   color: $second-color;
 }
 
-$h1: 20px;
+$h1: 28px;
 
-$normal: 14px;
+$normal: 18px;
 
 /* border  */
 
@@ -65,7 +65,10 @@ a {
     color: $second-color;
   }
 }
-#title {
+#title a {
   @include title;
   font-size: $h1;
+  &:hover {
+    color: $second-color;
+  }
 } 

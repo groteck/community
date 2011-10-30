@@ -4,7 +4,7 @@ class CreateBlogEntries < ActiveRecord::Migration
       t.string :title
       t.text :content
       t.integer :user_id
-
+      t.integer :preview, :default => 1500
       t.timestamps
     end
   end

@@ -16,12 +16,12 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :content %><br />
+    <%= f.label "Content: insert <!--preview--> for preview on the entries list." %><br />
     <%= f.text_area :content %>
   </div>
   <div class="field">
     <label for="tags">Tags</label>
-    <input id="tags" name="tags" size="30" type="text">    
+    <input id="tags" name="tags" size="30" type="text" value="<%@blog_entry.tags.each do |tag|%> <%= tag.name %> <%end%>">    
   </div>
 
   <div class="actions">

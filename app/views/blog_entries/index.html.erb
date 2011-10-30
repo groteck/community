@@ -1,7 +1,7 @@
 <% @blog_entries.each do |blog_entry| %>
   <div id="blog_entry">
     <div id="title"><%= link_to "#{blog_entry.title}", blog_entry %></div>
-    <div id="extract"><%= blog_entry.content %></div>
+    <div id="extract"><%=truncate(blog_entry.content, :length => blog_entry.preview) %></div>
     <div id="information"><% blog_entry.tags.each do |tag|%> <%= tag.name%> <%end%> <%= blog_entry.user.email%> <%= blog_entry.updated_at %></div>
     <div id="acctions"><%= link_to 'Entrada completa', blog_entry %> | <%= link_to 'Edit', edit_blog_entry_path(blog_entry) %> 
     | <%= link_to 'Destroy', blog_entry, confirm: 'Are you sure?', method: :delete %></div>
