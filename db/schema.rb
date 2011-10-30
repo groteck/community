@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(:version => 20111027181742) do
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "updated_at"
     t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "blog_entries_tags", :force => true do |t|

@@ -22,7 +22,9 @@ $second-color: #000;
   font-family: 'Chivo', sans-serif;
   color: $second-color;
 }
-$h1: 100px;
+
+$h1: 20px;
+
 $normal: 14px;
 
 /* border  */
@@ -40,6 +42,8 @@ $normal: 14px;
     border-style: solid;
     border-color: $border-color;
 }
+
+// end variables & mixins
 
 /* gerneral parts */
 html {
@@ -61,4 +65,7 @@ a {
     color: $second-color;
   }
 }
-  
+#title {
+  @include title;
+  font-size: $h1;
+} 
