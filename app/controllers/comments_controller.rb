@@ -15,13 +15,25 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @blog_entry = Post.find(params[:post_id])
+    @blog_entry = BlogEntry.find(params[:blog_entry_id])
     @comment = @blog_entry.comments.find(params[:id])
     @comment.destroy
-    redirect_to post_path(@blog_entry)
+    redirect_to blog_entry_path(@blog_entry)
   end
   def edit
     @comment = Comment.find(params[:id])
   end
-
+  def update
+    @comment = Comment.find(params[:id])
+    @blog_entry = BlogEntry.find(params[:blog_entry_id])
+    respond_to do |format|
+      if @comment.update_attributes(params[:comment])
+        format.html { redirect_to @blog_entry, notice: 'Blog entry was successfully updated.' }
+        format.json { head :ok }        
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @comment.errors, status: :unprocessable_entity } 
+      end
+    end
+  end
 end
