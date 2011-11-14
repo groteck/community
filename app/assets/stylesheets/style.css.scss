@@ -14,9 +14,13 @@ $second-color: #000;
   font-family: 'Chivo', sans-serif;
   color: $main-color;
 }
-@mixin title {
+@mixin title-url {
   font-family: 'Contrail One', cursive; 
   color: $main-color;
+}  
+@mixin title {                 
+  font-family: 'Contrail One', cursive; 
+  color: $second-color;          
 }  
 @mixin text {
   font-family: 'Chivo', sans-serif;
@@ -66,9 +70,13 @@ a {
   }
 }
 #title a {
-  @include title;
+  @include title-url;
   font-size: $h1;
   &:hover {
     color: $second-color;
   }
-} 
+}
+h1 {
+ @include title;
+ font-size: $h1;  
+}

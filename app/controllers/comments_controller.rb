@@ -20,4 +20,8 @@ class CommentsController < ApplicationController
     @comment.destroy
     redirect_to post_path(@blog_entry)
   end
+  def edit
+    @comment = Comment.find(params[:id])
+  end
+
 end

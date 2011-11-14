@@ -49,7 +49,7 @@ class BlogEntriesController < ApplicationController
       @blog_entry.tags << Tag.find_or_create_by_name(tag)
     end
     
-    @blog_entry.preview = @blog_entry.content.index("<!--preview-->")   
+    @blog_entry.preview = @blog_entry.content.index("<!-- preview -->")   
 
     @blog_entry.save
     respond_to do |format|
@@ -67,7 +67,17 @@ class BlogEntriesController < ApplicationController
   # PUT /blog_entries/1.json
   def update
     @blog_entry = BlogEntry.find(params[:id])
+    @blog_entry.preview = @blog_entry.content.index("<!-- preview -->")
+    nuevos = params[:tags].split
+    viejos = @blog_entry.tags.map(&:name)
 
+    (nuevos - viejos).each do |nuevo_tag| # añadimos los nuevos que no había
+      @blog_entry.tags.create(:name => nuevo_tag)
+    end
+
+    (viejos - nuevos).each do |viejo_tag| # quitamos los viejos que sobran
+      @blog_entry.tags.find_by_name(viejo_tag).destroy
+    end
     respond_to do |format|
       if @blog_entry.update_attributes(params[:blog_entry])
         format.html { redirect_to @blog_entry, notice: 'Blog entry was successfully updated.' }
