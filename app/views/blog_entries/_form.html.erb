@@ -16,8 +16,8 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label "Content: insert <!--preview--> for preview on the entries list." %><br />
-    <%= f.text_area :content %>
+    <%= f.label "Content: insert <!-- preview --> for preview on the entries list." %><br />
+    <%= f.cktext_area :content, :toolbar => 'Full' %>
   </div>
   <div class="field">
     <label for="tags">Tags</label>

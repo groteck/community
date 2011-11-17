@@ -1,4 +1,8 @@
 class CommentsController < ApplicationController
+
+  before_filter :autorize_user, :only => :create
+  before_filter :modify_comments, :except => :create
+
   def create
     @blog_entry = BlogEntry.find(params[:blog_entry_id])
     @comment = @blog_entry.comments.create(params[:comment])
@@ -35,5 +39,17 @@ class CommentsController < ApplicationController
         format.json { render json: @comment.errors, status: :unprocessable_entity } 
       end
     end
+  end
+
+  protected
+  def modify_comments
+   @user ||= User.find_by_id(session[:user_id]) if session[:user_id]
+   if session[:user_id]
+    unless session[:user_id] == Comment.find(params[:id]).user_id or @user.access_level == 100
+      redirect_to blog_entry_path(BlogEntry.find(params[:blog_entry_id])), notice: "don't have enough rights"
+    end
+   else
+     redirect_to blog_entry_path(BlogEntry.find(params[:blog_entry_id])), notice: "don't log in"
+   end 
   end
 end

@@ -1,14 +1,12 @@
-<div id="blog_title">
-  <%= @blog_entry.title %>
-</div>
+<div id="title"><%= link_to "#{@blog_entry.title}", @blog_entry %></div>
 
 <div id="blog_content">
   <%= @blog_entry.content.html_safe %>
 </div>
 
 <div id="blog_footer">
-  by:<%= @blog_entry.user.email %>, last update:<%= @blog_entry.updated_at %></br>
-  Tags:<%@blog_entry.tags.each do |tag|%> <%= tag.name %> <%end%>
+  <%="by: ".html_safe%><%= link_to "#{@blog_entry.user.email}", @blog_entry.user %>, <%="last update: ".html_safe%><%= @blog_entry.updated_at %></br>
+  <%="Tags: ".html_safe%><%@blog_entry.tags.each do |tag|%> <%= tag.name %> <%end%>
 </div>
 
 
@@ -18,8 +16,10 @@
 
 <div class="comments">
  <hr>
-  
+<%if @blog_entry.comments%>
+  <%='<h1>Comments:</h1>'.html_safe %>
   <%= render "comments/comment" %> 
+<%end%>
 
 <div class="form_comments">
 <div class="title"><h1>New comment:</h1></div>

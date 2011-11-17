@@ -1,4 +1,7 @@
 class BlogEntriesController < ApplicationController
+
+  before_filter :autorize_admin, :except => [:index, :show]
+
   # GET /blog_entries
   # GET /blog_entries.json
   def index
@@ -68,6 +71,9 @@ class BlogEntriesController < ApplicationController
   def update
     @blog_entry = BlogEntry.find(params[:id])
     @blog_entry.preview = @blog_entry.content.index("<!-- preview -->")
+    unless @blog_entry.preview
+      @blog_entry.preview = 1500
+    end 
     nuevos = params[:tags].split
     viejos = @blog_entry.tags.map(&:name)
 

@@ -1,6 +1,5 @@
 <% @blog_entry.comments.each do |comment| %>
 <% if comment.user %>
-  <%='<h1>Comments:</h1>'.html_safe %>
   <div class="content">
     <%=comment.content.html_safe %>
   <div><%= 'last update: '.html_safe%>  <%= comment.updated_at%></div>
