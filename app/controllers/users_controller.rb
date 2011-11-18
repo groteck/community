@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :autorize_user, :except => [:show, :create, :new]
-  before_filter :autorize_admin, :only => [:edit, :index, :delete]  
+  before_filter :autorize_admin, :only => [:index, :delete]  
   # GET /users
   # GET /users.json
   def index
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     unless session[:user_id]
       @user = User.new
     else
-      redirect_to @user, notice: 'You are log in.'
+      redirect_to root_path, notice: 'You are log in.'
     end
   end
    
@@ -43,9 +43,9 @@ class UsersController < ApplicationController
   def create
     unless session[:user_id]
       @user = User.new(params[:user])
-      if @user.id == 1
-        @user.access_level = 100
-      end
+      unless User.last
+        @user.access_level= 100
+      end      
       respond_to do |format|
         if @user.save
           format.html { redirect_to root_url, :notice => "Signed up!" }
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
         end
       end
     else
-      redirect_to @user, notice: 'You are log in.'
+      redirect_to root_path, notice: 'You are log in.'
     end
   end
 
