@@ -52,7 +52,9 @@ class BlogEntriesController < ApplicationController
       @blog_entry.tags << Tag.find_or_create_by_name(tag)
     end
     
-    @blog_entry.preview = @blog_entry.content.index("<!-- preview -->")   
+    if @blog_entry.content.index("<!-- preview -->")
+      @blog_entry.preview = @blog_entry.content.index("<!-- preview -->")
+    end
 
     @blog_entry.save
     respond_to do |format|
