@@ -1,4 +1,6 @@
 class TagsController < ApplicationController
+  before_filter :autorize_admin, :except => [:index, :show]  
+
   # GET /tags
   # GET /tags.json
   def index

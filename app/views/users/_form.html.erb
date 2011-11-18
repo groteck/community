@@ -8,28 +8,30 @@
         <% end %>  
       </ul>  
     </div>  
-  <% end %>  
-  <div class="field">  
-    <%= f.label :email %>  
-    <%= f.text_field :email %>  
-  </div>
+  <% end %>
+<table>  
+  <tr class="field">  
+    <td><%= f.label :email %></td>  
+    <td><%= f.text_field :email %></td>  
+  </tr>
   <%if current_user %>
-  <div class="field">          
-    <%= f.label :old_password %>   
-    <%= f.password_field :old_password %>  
-  </div>
+  <tr class="field">          
+    <td><%= f.label :old_password %></td>   
+    <td><%= f.password_field :old_password %></td>  
+  </tr>
   <%end%>  
-  <div class="field">  
-    <%= f.label :password %>  
-    <%= f.password_field :password %>  
-  </div>  
-  <div class="field">  
-    <%= f.label :password_confirmation %>  
-    <%= f.password_field :password_confirmation %>  
-  </div>  
-  <div class="field">
-    <%= f.label :access_level %><br />
-    <%= f.number_field :access_level %> 
-  </div>
-  <div class="actions"><%= f.submit %></div>  
+  <tr class="field">  
+    <td><%= f.label :password %></td>  
+    <td><%= f.password_field :password %></td>  
+  </tr>  
+  <tr class="field">  
+    <td><%= f.label :password_confirmation %></td>  
+    <td><%= f.password_field :password_confirmation %></td>  
+  </tr>  
+  <tr class="field">
+    <td><%= f.label :access_level %></td>
+    <td><%= f.number_field :access_level %></td> 
+  </tr>
+  <tr class="actions"><td><%= f.submit %> or <%= link_to "Log in", log_in_path%></td></tr>
+</table> 
 <% end %>  

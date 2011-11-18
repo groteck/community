@@ -9,19 +9,24 @@
   <link href='http://fonts.googleapis.com/css?family=Contrail+One|Chivo' rel='stylesheet' type='text/css'>  
 </head>  
 <body>  
+  <div id="notices">
   <% flash.each do |name, msg| %>  
     <%= content_tag :div, msg, :id => "flash#{name}" %>  
-  <% end %>  
+  <% end %>
+  <div id="body">  
   <div id="user_nav">  
     <% if current_user %>  
-      Logged in as <%= current_user.email %>  
+      Logged in as <%= link_to "#{current_user.email}", current_user %>  
       <%= link_to "Log out", log_out_path %>  
-    <% else %> 
+    <% else %>
+      <%unless current_page?(sign_up_path) or current_page?(log_in_path)%> 
       <%= render "sessions/form" %>
+      <%end%>
     <% end %>  
-  </div>   
-  <div>
+  </div>
+  <div id="main">
     <%= yield %>  
   </div>
+  </div
 </body>  
 </html>  

@@ -54,9 +54,13 @@ html {
   background-color: $background-color;
 }
 
-body { 
-  background-color: $body-color;
+body {
+  margin: 0px;
+}
+
+#body { 
   margin: 32px auto;
+  background-color: $body-color; 
   @include radius;
   @include text;
   font-size: $normal;
@@ -80,3 +84,16 @@ h1 {
  @include title;
  font-size: $h1;  
 }
+#user_nav {ckground-color: $body-color;   
+  @include text;
+  font-size: $normal;  
+  float: right; 
+  border-width: 0px 0px 1px 1px;
+  border-style: solid;
+  border-color: $border-color;
+  background-color: $background-color;
+  -webkit-border-radius: 0px 5px 0px 0px;
+  -moz-border-radius: 0px 5px 0px 0px;
+  border-radius: 0px 5px 0px 0px;
+}
+

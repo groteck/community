@@ -11,9 +11,13 @@ class ApplicationController < ActionController::Base
   helper_method :autorize_user
 
   def autorize_admin
-   unless User.find_by_id(session[:user_id]).access_level == 100
-     redirect_to root_url, :notice => "admin's zone"
-   end 
+    if session[:user_id]
+     unless User.find_by_id(session[:user_id]).access_level == 100
+       redirect_to root_url, :notice => "admin's zone"
+     end
+   else 
+     redirect_to root_url, :notice => "admin's zone" 
+   end
   end
   helper_method :autorize_admin
 

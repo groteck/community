@@ -11,7 +11,7 @@ Community::Application.routes.draw do
   match "log_out" => "sessions#destroy"  
 #  get "sign_up" => "users#new", :as => "sign_up" 
   match "sign_up" => "users#new" 
-  root :to => "sessions#new"  
+  root :to => "blog_entries#index"  
   resources :users  
   resources :sessions  
 

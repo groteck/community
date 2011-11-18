@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :autorize_user, :except => [:show, :create, :new]
+  before_filter :autorize_admin, :only => [:edit, :index, :delete]  
   # GET /users
   # GET /users.json
   def index
@@ -24,7 +26,11 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.json
   def new
-    @user = User.new
+    unless session[:user_id]
+      @user = User.new
+    else
+      redirect_to @user, notice: 'You are log in.'
+    end
   end
    
    # GET /users/1/edit
@@ -35,37 +41,45 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to root_url, :notice => "Signed up!" }
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    unless session[:user_id]
+      @user = User.new(params[:user])
+      if @user.id == 1
+        @user.access_level = 100
       end
+      respond_to do |format|
+        if @user.save
+          format.html { redirect_to root_url, :notice => "Signed up!" }
+          format.json { render json: @user, status: :created, location: @user }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      redirect_to @user, notice: 'You are log in.'
     end
   end
 
   # PUT /users/1
   # PUT /users/1.json
   def update
-    @user = User.find(session[:user_id])
-    if @user && @user.authenticate(params[:old_password]) 
-      respond_to do |format|
-        if @user.update_attributes(params[:user])
-          format.html { redirect_to @user, notice: 'User was successfully updated.' }
-          format.json { head :ok }
+    @use = User.find(params[:id])
+    if @user == User.find(session[:user_id]) or User.find(session[:user_id]).access_level == 100
+        if @user.authenticate(params[:old_password]) or User.find(session[:user_id]).access_level == 100
+          respond_to do |format|
+            if @user.update_attributes(params[:user])
+              format.html { redirect_to @user, notice: 'User was successfully updated.' }
+              format.json { head :ok }
+            else
+              format.html { render action: "edit" }
+              format.json { render json: @user.errors, status: :unprocessable_entity }
+            end
+          end
         else
-          format.html { render action: "edit" }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
+          flash.now.alert = "Invalid email or password"
+          render "new"
         end
       end
-    else
-     flash.now.alert = "Invalid email or password"
-     render "new"
-    end
   end
 
   # DELETE /users/1
