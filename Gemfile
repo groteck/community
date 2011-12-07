@@ -15,7 +15,9 @@ group :assets do
   gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
 end
-
+#saneamiento de html
+gem 'sanitize'
+# javascript default framework
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
@@ -24,6 +26,8 @@ gem 'jquery-rails'
 # Use unicorn as the web server
   gem 'unicorn'
 
+# server
+gem 'heroku' 
 # Deploy with Capistrano
 # gem 'capistrano'
 

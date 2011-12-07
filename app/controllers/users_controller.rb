@@ -41,6 +41,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    params[:user][:access_level] = 0
     unless session[:user_id]
       @user = User.new(params[:user])
       unless User.last
@@ -63,7 +64,14 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    
     @use = User.find(params[:id])
+    unless User.find(session[:user_id]).access_level == 100
+      params[:user][:access_level] = 0 
+    end
+    if User.find(session[:user_id]).access_level == 100
+      params[:user][:old_password] = 0 
+    end  
     if @user == User.find(session[:user_id]) or User.find(session[:user_id]).access_level == 100
         if @user.authenticate(params[:old_password]) or User.find(session[:user_id]).access_level == 100
           respond_to do |format|

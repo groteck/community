@@ -45,6 +45,8 @@ class BlogEntriesController < ApplicationController
   # POST /blog_entries
   # POST /blog_entries.json
   def create
+    
+    #params[:blog_entry][:content] = Sanitize.clean(params[:blog_entry][:content], Sanitize::Config::RELAXED)
     @blog_entry = BlogEntry.new(params[:blog_entry])
     @blog_entry.user_id = current_user.id
     

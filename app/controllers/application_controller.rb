@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-
+  TAGS_ALLOWED = %w[table tr td li ul b i div br strong 
+big em sub sup q ins del abr acronym address q cite h1 h2 h3 h4 h5 h6 bdo pre tt code 
+kdb samp font p a img th caption colgroup col thead tbody tfoot ol dl dt dd form imput 
+textarea label fieldset legend select optgroup option button div span embed object 
+strikes ins quote blockquote u hr]  
+  ATRIBUTESS_ALLOWED = %w[id class style height width]
   protected
 
   def autorize_user
